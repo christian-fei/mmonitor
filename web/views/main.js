@@ -1,7 +1,19 @@
 var html = require('choo/html')
-var jt = require('json-toy')
+var css = require('sheetify')
 
 var TITLE = 'mmonitor'
+
+const monitorPrefix = css`
+  :host {
+    list-style-type: none;
+    border-bottom: 2em solid black;
+    margin-bottom: 3rem;
+  }
+  :host h1 {
+    margin: 0;
+    margin-bottom: 0.1rem;
+  }
+`
 
 module.exports = view
 
@@ -10,23 +22,18 @@ function view (state, emit) {
 
   const resultsAsList = Object.keys(state.results).reduce((acc, key) => acc.concat([{monitor: key, result: state.results[key]}]), [])
 
-  const treeString = jt.treeString(state.results)
-
   return html`
     <body class="code lh-copy">
       <main class="pa3 cf center">
         <section class="fl mw6 w-50-m w-third-l pa3">
           <ul>
             ${resultsAsList.map(r => html`
-              <li>
-                <h1>${r.monitor}</h1>
-                <h1 style="font-size: 3em;">${r.result}</h1>
+              <li class="${monitorPrefix}">
+                <h1 style="font-size: 2em;">${r.monitor}</h1>
+                <h1 style="font-size: 6em;">${r.result}</h1>
               </li>
             `)}
           </ul>
-          <pre>
-            ${treeString}
-          </pre>
         </section>
       </main>
     </body>
