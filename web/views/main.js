@@ -54,7 +54,7 @@ function view (state, emit) {
           <ul class="flex flex-wrap">
             ${state.results.map(r => html`
               <li class="${monitorPrefix} pl5 pr5 mb3">
-                <h1 class="mb1" style="font-size: 2em;">${r.title || (r.collection + '.' + r.type)}</h1>
+                <h1 class="mb1" style="font-size: 2em;">${r.title || (r.collection + '.' + r.type + (r.query ? '(' + r.query + ')' : ''))}</h1>
                 <h1 class="mb1" style="font-size: 5em;">
                 ${Array.isArray(r.result) ? r.result.map(r => html`
                   <p>${Object.keys(r).reduce((acc, key) => `${acc} ${r[key]}`, '')}</p>
