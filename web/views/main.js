@@ -71,18 +71,3 @@ function view (state, emit) {
     </body>
   `
 }
-
-function printJSON (json) {
-  if (typeof json === 'object') {
-    if (Array.isArray(json)) {
-      return html`
-        <span>
-        ${json
-          .map(j => Object.keys(j)
-            .reduce((acc, curr) => `${acc} ${j[curr]}`, '') + ' | ')}
-        </span>
-      `
-    }
-  }
-  return json
-}
