@@ -7,6 +7,8 @@ const finalhandler = require('finalhandler')
 const db = require('./db')
 const connections = []
 
+const cache = {results: []}
+
 main()
 
 async function main () {
@@ -25,19 +27,23 @@ async function main () {
     }
 
     if (req.headers.accept && req.headers.accept.indexOf('text/event-stream') >= 0) {
-      return handleSSE(req, res)
+      handleSSE(req, res)
+      sendSSE(JSON.stringify({results: cache.results}))
+      return
     }
 
     serve(req, res, finalhandler(req, res))
   }).listen(process.env.SSE_PORT || 4200)
 
   const results = await db.run()
-  sendSSE(JSON.stringify({results}))
+  cache.results = results
+  sendSSE(JSON.stringify({results: cache.results}))
 
   setInterval(async () => {
     const results = await db.run()
-    sendSSE(JSON.stringify({results}))
-  }, 5000)
+    cache.results = results
+    sendSSE(JSON.stringify({results: cache.results}))
+  }, 10000)
 }
 
 function handleSSE (req, res) {
