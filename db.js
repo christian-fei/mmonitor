@@ -1,5 +1,4 @@
 const monitors = require('./monitors')
-const {serialize} = require('./lib/monitor-utils')
 const monk = require('monk')
 const db = monk(process.env.MONGO_URI || process.env.npm_config_MONGO_URI)
 
@@ -8,10 +7,11 @@ module.exports = {
 }
 
 async function run () {
-  const results = {}
+  const results = []
   for (const monitor of monitors) {
     const result = await exec(monitor)
-    results[serialize(monitor)] = result
+    monitor.result = result
+    results.push(monitor)
   }
   return results
 }

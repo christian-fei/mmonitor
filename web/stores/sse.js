@@ -1,7 +1,7 @@
 module.exports = sseStore
 
 function sseStore (state, emitter) {
-  state.results = {}
+  state.results = []
 
   emitter.on('sse:open', function () {
     console.log('sse:open')

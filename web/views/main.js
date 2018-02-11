@@ -44,21 +44,21 @@ function view (state, emit) {
   iter++
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
-  const resultsAsList = Object.keys(state.results).reduce((acc, key) => acc.concat([{monitor: key, result: state.results[key]}]), [])
-
   return html`
     <body class="avenir lh-copy">
       <main class="pa3 cf center">
         <section class="pa3">
-          ${resultsAsList.length === 0 ? html`
+          ${state.results.length === 0 ? html`
             <h1>loading...</h1>
           ` : null}
           <ul class="flex flex-wrap">
-            ${resultsAsList.map(r => html`
+            ${state.results.map(r => html`
               <li class="${monitorPrefix} pl5 pr5 mb3">
-                <h1 class="mb1" style="font-size: 2em;">${r.title || r.monitor}</h1>
+                <h1 class="mb1" style="font-size: 2em;">${r.title || (r.collection + '.' + r.type)}</h1>
                 <h1 class="mb1" style="font-size: 5em;">
-                  ${printJSON(r.result)}
+                ${Array.isArray(r.result) ? r.result.map(r => html`
+                  <p>${Object.keys(r).reduce((acc, key) => `${acc} ${r[key]}`, '')}</p>
+                `) : r.result}
                 </h1>
                 <i class="${iter % 2 === 0 ? blinkPrefix : null}">
                   Last updated ${new Date().toISOString()}
