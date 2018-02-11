@@ -35,13 +35,11 @@ async function main () {
     serve(req, res, finalhandler(req, res))
   }).listen(process.env.SSE_PORT || 4200)
 
-  const results = await db.run()
-  cache.results = results
+  cache.results = await db.run()
   sendSSE(JSON.stringify({results: cache.results}))
 
   setInterval(async () => {
-    const results = await db.run()
-    cache.results = results
+    cache.results = await db.run()
     sendSSE(JSON.stringify({results: cache.results}))
   }, 10000)
 }
