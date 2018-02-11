@@ -26,11 +26,15 @@ function view (state, emit) {
     <body class="avenir lh-copy">
       <main class="pa3 cf center">
         <section class="fl mw6 w-50-m w-third-l pa3">
+          ${resultsAsList.length === 0 ? html`
+            <h1>loading...</h1>
+          ` : null}
           <ul>
             ${resultsAsList.map(r => html`
               <li class="${monitorPrefix}">
                 <h1 style="font-size: 2em;">${r.monitor}</h1>
                 <h1 style="font-size: 6em;">${r.result}</h1>
+                <i>Last updated ${new Date().toISOString()}</i>
               </li>
             `)}
           </ul>
