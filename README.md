@@ -39,6 +39,7 @@ npm start
 ### web client
 
 ```
+cd web
 npm i
 npm start
 ```
