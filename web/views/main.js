@@ -4,18 +4,18 @@ var css = require('sheetify')
 var TITLE = 'mmonitor'
 
 const monitorPrefix = css`
+  @keyframes fade-out {
+    from {
+      border-color: #ccc;
+    }
+    to {
+      border-color: #f1f1f1;
+    }
+  }
   :host {
     list-style-type: none;
-    /* border-bottom: 2em solid black; */
-    margin-bottom: 3rem;
-  }
-  :host {
-    border-left: 2em solid black;
-    padding-left: 2em;
-  }
-  :host h1 {
-    margin: 0;
-    margin-bottom: 0.1rem;
+    animation: fade-out 1s ease-out;
+    border-left: 2em solid #f1f1f1;
   }
 `
 
@@ -29,15 +29,15 @@ function view (state, emit) {
   return html`
     <body class="avenir lh-copy">
       <main class="pa3 cf center">
-        <section class="fl mw6 w-50-m w-third-l pa3">
+        <section class="pa3">
           ${resultsAsList.length === 0 ? html`
             <h1>loading...</h1>
           ` : null}
-          <ul>
+          <ul class="flex flex-wrap">
             ${resultsAsList.map(r => html`
-              <li class="${monitorPrefix}">
-                <h1 style="font-size: 2em;">${r.monitor}</h1>
-                <h1 style="font-size: 6em;">${r.result}</h1>
+              <li class="${monitorPrefix} pl5 pr5 mb3">
+                <h1 class="mb1" style="font-size: 2em;">${r.monitor}</h1>
+                <h1 class="mb1" style="font-size: 6em;">${r.result}</h1>
                 <i>Last updated ${new Date().toISOString()}</i>
               </li>
             `)}
