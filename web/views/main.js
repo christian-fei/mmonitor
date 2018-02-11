@@ -6,7 +6,7 @@ var TITLE = 'mmonitor'
 const monitorPrefix = css`
   :host {
     list-style-type: none;
-    border-bottom: 2em solid black;
+    /* border-bottom: 2em solid black; */
     margin-bottom: 3rem;
   }
   :host h1 {
@@ -23,7 +23,7 @@ function view (state, emit) {
   const resultsAsList = Object.keys(state.results).reduce((acc, key) => acc.concat([{monitor: key, result: state.results[key]}]), [])
 
   return html`
-    <body class="code lh-copy">
+    <body class="avenir lh-copy">
       <main class="pa3 cf center">
         <section class="fl mw6 w-50-m w-third-l pa3">
           <ul>
