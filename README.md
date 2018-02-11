@@ -36,7 +36,7 @@ npm i
 npm start
 ```
 
-### web client
+### web client
 
 ```
 npm i
