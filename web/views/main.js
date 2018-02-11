@@ -9,6 +9,10 @@ const monitorPrefix = css`
     /* border-bottom: 2em solid black; */
     margin-bottom: 3rem;
   }
+  :host {
+    border-left: 2em solid black;
+    padding-left: 2em;
+  }
   :host h1 {
     margin: 0;
     margin-bottom: 0.1rem;
