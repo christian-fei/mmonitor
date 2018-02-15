@@ -1,3 +1,5 @@
+# mmonitor
+
 mmonitor is a simple tool to monitor mongo queries and aggregations.
 
 ![example](example.png)
