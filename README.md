@@ -1,8 +1,10 @@
-# configuration
+mmonitor is a simple tool to monitor mongo queries and aggregations.
 
 ![example](example.png)
 
-## env variables
+## configuration
+
+### env variables
 
 the following environment variables must be set:
 
@@ -16,7 +18,7 @@ optionally:
 SSE_PORT
 ```
 
-## monitors.js
+### monitors.js
 
 create your own `monitors.js` file, starting from `monitors.example.js`.
 
