@@ -1,5 +1,7 @@
 # configuration
 
+![example](example.png)
+
 ## env variables
 
 the following environment variables must be set:
