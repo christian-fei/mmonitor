@@ -1,6 +1,7 @@
+const log = require('debug')('mmonitor:db')
 const monk = require('monk')
 const connectionString = process.env.MONGO_URI || process.env.npm_config_MONGO_URI
-console.log('connectionString', connectionString)
+log('connectionString', connectionString)
 const db = monk(connectionString)
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
 async function run (monitors) {
   const results = []
   for (const monitor of monitors) {
+    log(`run monitor "${monitor.type}" on collection ${monitor.collection}`)
     const result = await exec(monitor)
     monitor.result = result
     results.push(monitor)

@@ -5,7 +5,7 @@ var sseStore = require('./stores/sse')
 css('tachyons')
 
 var app = choo()
-app.use(require('choo-sse')('http://0.0.0.0:4200'))
+app.use(require('choo-sse')('http://0.0.0.0:9000'))
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(require('choo-devtools')())

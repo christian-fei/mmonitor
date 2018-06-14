@@ -1,5 +1,8 @@
 #! /usr/bin/env node
 
+const debug = require('debug')
+debug.enable('mmonitor:*')
+const log = debug('mmonitor:main')
 const http = require('http')
 const serveStatic = require('serve-static')
 const serve = serveStatic('web/dist', {'index': ['index.html']})
@@ -13,15 +16,16 @@ const cache = {results: []}
 main()
 
 async function main () {
+  const PORT = process.env.HTTP_PORT || 9000
   let [file] = process.argv.slice(2)
   if (!file) {
-    console.log('please provide a valid monitors.js file path')
+    log('please provide a valid monitors.js file path')
     process.exit(1)
   }
 
   const monitors = require(file)
-  console.log('MMONITOR START', new Date().toISOString())
-  console.log('process.env.HTTP_PORT || 4200', process.env.HTTP_PORT || 4200)
+  log(`start: ${new Date().toISOString()}`)
+  log(`listening on: http://localhost:${PORT}`)
 
   http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -41,7 +45,7 @@ async function main () {
     }
 
     serve(req, res, finalhandler(req, res))
-  }).listen(process.env.HTTP_PORT || 4200)
+  }).listen(PORT)
 
   cache.results = await db.run(monitors)
   sendSSE(JSON.stringify({results: cache.results}))
@@ -53,6 +57,7 @@ async function main () {
 }
 
 function handleSSE (req, res) {
+  log('handle sse')
   connections.push(res)
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
@@ -62,9 +67,11 @@ function handleSSE (req, res) {
 }
 
 function sendSSE (data) {
+  log('send sse')
   connections.forEach(connection => {
     if (!connection) return
     const id = new Date().toISOString()
+    log('send connection', id, data)
     connection.write('id: ' + id + '\n')
     connection.write('data: ' + data + '\n\n')
   })
