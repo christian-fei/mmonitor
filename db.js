@@ -1,6 +1,6 @@
 const log = require('debug')('mmonitor:db')
 const monk = require('monk')
-const connectionString = process.env.MONGO_URI || process.env.npm_config_MONGO_URI
+const connectionString = process.env.MONGO_URL || process.env.npm_config_MONGO_URL
 log('connectionString', connectionString)
 const db = monk(connectionString)
 

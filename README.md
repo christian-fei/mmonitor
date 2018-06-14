@@ -13,7 +13,7 @@ mmonitor is a simple tool to monitor mongo queries and aggregations.
 the following environment variables must be set:
 
 ```
-MONGO_URI
+MONGO_URL
 ```
 
 optionally:
@@ -46,8 +46,8 @@ npm i -g mmonitor
 ## usage
 
 ```
-MONGO_URI="localhost:27017/work" mmonitor ~/work.monitors.js
-MONGO_URI="localhost:27017/project" mmonitor ~/project.monitors.js
+MONGO_URL="localhost:27017/work" mmonitor ~/work.monitors.js
+MONGO_URL="localhost:27017/project" mmonitor ~/project.monitors.js
 ```
 
 

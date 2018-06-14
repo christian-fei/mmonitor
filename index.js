@@ -18,13 +18,17 @@ main()
 async function main () {
   const PORT = process.env.HTTP_PORT || 9000
   let [file] = process.argv.slice(2)
+  log('file', file)
+
   if (!file) {
     log('please provide a valid monitors.js file path')
     process.exit(1)
   }
 
-  const monitors = require(file)
   log(`start: ${new Date().toISOString()}`)
+  const monitorsPath = `${process.cwd()}/${file}`
+  log(`reading monitors from ${monitorsPath}`)
+  const monitors = require(monitorsPath)
   log(`listening on: http://localhost:${PORT}`)
 
   http.createServer(function (req, res) {
