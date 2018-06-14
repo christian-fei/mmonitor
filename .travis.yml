@@ -5,6 +5,7 @@ script:
 - cd web
 - npm i
 - npm run build
+- cd ..
 deploy:
   skip_cleanup: true
   provider: npm
