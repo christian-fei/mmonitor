@@ -30,9 +30,9 @@ the structure of a monitor is the following:
 
 ```
 {
-  collection     // string
-  type           // 'find', 'distinct', 'aggregate', 'length', 'mapReduce'
-  query          // optional query or pipeline
+  collection  // string
+  type        // 'find', 'distinct', 'aggregate', 'length', 'mapReduce'
+  query       // optional query or pipeline
 }
 ```
 
