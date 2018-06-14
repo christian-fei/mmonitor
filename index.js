@@ -2,7 +2,7 @@
 
 const http = require('http')
 const serveStatic = require('serve-static')
-const serve = serveStatic('build', {'index': ['index.html']})
+const serve = serveStatic('web/dist', {'index': ['index.html']})
 const finalhandler = require('finalhandler')
 const db = require('./db')
 
