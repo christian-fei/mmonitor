@@ -6,6 +6,19 @@ mmonitor is a simple tool to monitor mongo queries and aggregations.
 
 ![example](example.png)
 
+## installation
+
+```
+npm i -g mmonitor
+```
+
+## usage
+
+```
+MONGO_URL="localhost:27017/work" mmonitor ~/work.monitors.js
+MONGO_URL="localhost:27017/project" mmonitor ~/project.monitors.js
+```
+
 ## configuration
 
 ### env variables
@@ -36,19 +49,6 @@ the structure of a monitor is the following:
 }
 ```
 
-
-## installation
-
-```
-npm i -g mmonitor
-```
-
-## usage
-
-```
-MONGO_URL="localhost:27017/work" mmonitor ~/work.monitors.js
-MONGO_URL="localhost:27017/project" mmonitor ~/project.monitors.js
-```
 
 
 
