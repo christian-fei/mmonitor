@@ -38,6 +38,23 @@ the structure of a monitor is the following:
 ## installation
 
 ```
+npm i -g mmonitor
+```
+
+## usage
+
+```
+MONGO_URI="localhost:27017/work" mmonitor ~/work.monitors.js
+MONGO_URI="localhost:27017/project" mmonitor ~/project.monitors.js
+```
+
+
+
+## development
+
+### installation
+
+```
 npm i
 npm start
 ```
