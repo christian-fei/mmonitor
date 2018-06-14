@@ -21,7 +21,7 @@ async function main () {
 
   const monitors = require(file)
   console.log('MMONITOR START', new Date().toISOString())
-  console.log('process.env.SSE_PORT || 4200', process.env.SSE_PORT || 4200)
+  console.log('process.env.HTTP_PORT || 4200', process.env.HTTP_PORT || 4200)
 
   http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -41,7 +41,7 @@ async function main () {
     }
 
     serve(req, res, finalhandler(req, res))
-  }).listen(process.env.SSE_PORT || 4200)
+  }).listen(process.env.HTTP_PORT || 4200)
 
   cache.results = await db.run(monitors)
   sendSSE(JSON.stringify({results: cache.results}))

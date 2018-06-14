@@ -19,7 +19,7 @@ MONGO_URI
 optionally:
 
 ```
-SSE_PORT
+HTTP_PORT
 ```
 
 ### monitors.js
