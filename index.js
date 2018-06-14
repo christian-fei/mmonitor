@@ -5,6 +5,7 @@ const serveStatic = require('serve-static')
 const serve = serveStatic('build', {'index': ['index.html']})
 const finalhandler = require('finalhandler')
 const db = require('./db')
+
 const connections = []
 
 const cache = {results: []}
@@ -12,6 +13,13 @@ const cache = {results: []}
 main()
 
 async function main () {
+  let [file] = process.argv.slice(2)
+  if (!file) {
+    console.log('please provide a valid monitors.js file path')
+    process.exit(1)
+  }
+
+  const monitors = require(file)
   console.log('MMONITOR START', new Date().toISOString())
   console.log('process.env.SSE_PORT || 4200', process.env.SSE_PORT || 4200)
 
@@ -35,11 +43,11 @@ async function main () {
     serve(req, res, finalhandler(req, res))
   }).listen(process.env.SSE_PORT || 4200)
 
-  cache.results = await db.run()
+  cache.results = await db.run(monitors)
   sendSSE(JSON.stringify({results: cache.results}))
 
   setInterval(async () => {
-    cache.results = await db.run()
+    cache.results = await db.run(monitors)
     sendSSE(JSON.stringify({results: cache.results}))
   }, 10000)
 }

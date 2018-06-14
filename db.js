@@ -1,12 +1,13 @@
-const monitors = require('./monitors')
 const monk = require('monk')
-const db = monk(process.env.MONGO_URI || process.env.npm_config_MONGO_URI)
+const connectionString = process.env.MONGO_URI || process.env.npm_config_MONGO_URI
+console.log('connectionString', connectionString)
+const db = monk(connectionString)
 
 module.exports = {
   run
 }
 
-async function run () {
+async function run (monitors) {
   const results = []
   for (const monitor of monitors) {
     const result = await exec(monitor)
